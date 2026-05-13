@@ -16,14 +16,12 @@ public class OrderSummaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
 
-        // Initialize TextViews
         txtName = findViewById(R.id.txtSummaryName);
         txtPhone = findViewById(R.id.txtSummaryPhone);
         txtEmail = findViewById(R.id.txtSummaryEmail);
         txtFood = findViewById(R.id.txtSummaryFood);
         Button btnCancelOrder = findViewById(R.id.btnCancelOrder);
 
-        // Get data from Intent
         Intent intent = getIntent();
         if (intent != null) {
             String name = intent.getStringExtra("CUSTOMER_NAME");
@@ -31,14 +29,12 @@ public class OrderSummaryActivity extends AppCompatActivity {
             String email = intent.getStringExtra("CUSTOMER_EMAIL");
             String food = intent.getStringExtra("FOOD_ORDERED");
 
-            // Display data
             txtName.setText("Name: " + name);
             txtPhone.setText("Phone: " + phone);
             txtEmail.setText("Email: " + email);
             txtFood.setText("Food Ordered: " + food);
         }
 
-        // Set click listener for Cancel Order button using lambda
         btnCancelOrder.setOnClickListener(v -> finish());
     }
 }

@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
         txtName = findViewById(R.id.txtName);
         txtPhone = findViewById(R.id.txtPhone);
         txtEmail = findViewById(R.id.txtEmail);
@@ -29,12 +28,10 @@ public class MainActivity extends AppCompatActivity {
         Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         Button btnClearOrder = findViewById(R.id.btnClearOrder);
 
-        // Populate Spinner with food items, including a default "Select" option
         String[] foodItems = {"-- Select Food Item --", "Chicken Palau", "Lamb Palau", "Pizza", "Chow Mein"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, foodItems);
         spinnerFood.setAdapter(adapter);
 
-        // Set click listeners using lambdas
         btnPlaceOrder.setOnClickListener(v -> validateAndPlaceOrder());
         btnClearOrder.setOnClickListener(v -> clearOrderFields());
     }
@@ -44,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         txtPhone.setText("");
         txtEmail.setText("");
         spinnerFood.setSelection(0);
-        
-        // Clear errors
+
         txtName.setError(null);
         txtPhone.setError(null);
         txtEmail.setError(null);
@@ -57,12 +53,10 @@ public class MainActivity extends AppCompatActivity {
         String name = txtName.getText().toString().trim();
         String phone = txtPhone.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
-        
-        // Get the selected food item
+
         int selectedPosition = spinnerFood.getSelectedItemPosition();
         String food = spinnerFood.getSelectedItem().toString();
 
-        // Validation logic
         if (name.isEmpty()) {
             txtName.setError("Name cannot be empty");
             txtName.requestFocus();
@@ -87,13 +81,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Validate Spinner selection (position 0 is the default "Select" option)
         if (selectedPosition == 0) {
             Toast.makeText(this, "Please make a selection", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // If all valid, navigate to OrderSummaryActivity
         Intent intent = new Intent(MainActivity.this, OrderSummaryActivity.class);
         intent.putExtra("CUSTOMER_NAME", name);
         intent.putExtra("CUSTOMER_PHONE", phone);
